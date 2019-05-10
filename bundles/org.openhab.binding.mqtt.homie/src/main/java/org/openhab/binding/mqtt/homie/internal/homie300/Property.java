@@ -142,14 +142,14 @@ public class Property implements AttributeChanged {
                     .build();
         } else {
             if (attributes.datatype.equals(DataTypeEnum.enum_)) {
-                if (attributes.format.contains("PRESSED") && attributes.format.contains("RELEASED")) {
-                    return DefaultSystemChannelTypeProvider.SYSTEM_RAWBUTTON;
+                if (attributes.format.contains("DIR1_PRESSED") && attributes.format.contains("DIR1_RELEASED")
+                        && attributes.format.contains("DIR2_PRESSED") && attributes.format.contains("DIR2_RELEASED")) {
+                    return DefaultSystemChannelTypeProvider.SYSTEM_RAWROCKER;
                 } else if (attributes.format.contains("SHORT_PRESSED") && attributes.format.contains("LONG_PRESSED")
                         && attributes.format.contains("DOUBLE_PRESSED")) {
                     return DefaultSystemChannelTypeProvider.SYSTEM_BUTTON;
-                } else if (attributes.format.contains("DIR1_PRESSED") && attributes.format.contains("DIR1_RELEASED")
-                        && attributes.format.contains("DIR2_PRESSED") && attributes.format.contains("DIR2_RELEASED")) {
-                    return DefaultSystemChannelTypeProvider.SYSTEM_RAWROCKER;
+                } else if (attributes.format.contains("PRESSED") && attributes.format.contains("RELEASED")) {
+                    return DefaultSystemChannelTypeProvider.SYSTEM_RAWBUTTON;
                 }
             }
             return ChannelTypeBuilder.trigger(channelTypeUID, attributes.name)

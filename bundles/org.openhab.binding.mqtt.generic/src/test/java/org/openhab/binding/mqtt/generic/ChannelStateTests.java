@@ -278,8 +278,9 @@ public class ChannelStateTests {
 
         ZonedDateTime zd = ZonedDateTime.now();
         String datetime = zd.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String offset = zd.format(DateTimeFormatter.ofPattern("Z"));
         c.processMessage("state", datetime.getBytes());
-        assertThat(value.getChannelState().toString(), is(datetime + "+0100"));
+        assertThat(value.getChannelState().toString(), is(datetime + offset));
         assertThat(value.getMQTTpublishValue().toString(), is(datetime));
     }
 
